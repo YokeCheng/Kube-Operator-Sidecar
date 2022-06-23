@@ -1,82 +1,8 @@
 # kube-operator-sidecar
-通过kubebuilder实现创建自动注入sidecar的kube-operator
+// TODO(user): Add simple overview of use/purpose
 
 ## Description
-自我实践通过kubebuilder实现一个operator扩展，主要功能是模拟Openkruise的Sidecarset功能。为Pod自动注入sidecar
-
-
-## 项目构建过程
-
-### 安装 Kubebuilder
-官方地址: https://book.kubebuilder.io/quick-start.html
-
-```sh
-curl -L -o kubebuilder https://go.kubebuilder.io/dl/latest/$(go env GOOS)/$(go env GOARCH)
-chmod +x kubebuilder && mv kubebuilder /usr/local/bin/
-```
-
-### 初始化项目
-```shell
-# 创建项目目录
-mkdir -P $GOPATH/src/Kube-Operator-Sidecar
-
-# 进入项目目录
-cd $GOPATH/src/Kube-Operator-Sidecar
-
-# 初始化项目, domain 指定了后续注册 CRD 对象的 Group 域名。
-kubebuilder init --domain=kruise.io 
-```
-
-### 创建API(CRD)和Controller框架
-```shell
-kubebuilder create api --group apps --version v1alpha1 --kind SidecarSet --namespace=false
-```
-操作：
-
-运行 "kubebuilder create api --group apps --version v1alpha1 --kind SidecarSet --namespace=false"
-实际上不仅会创建 API，也就是 CRD，还会生成 Controller 的框架。
-
-参数解读：
-- group 加上之前的 domian 即此 CRD 的 Group: apps.kruise.io；
-- version 一般分三种，按社区标准：
-- v1alpha1: 此 api 不稳定，CRD 可能废弃、字段可能随时调整，不要依赖；
-- v1beta1: api 已稳定，会保证向后兼容，特性可能会调整；
-- v1: api 和特性都已稳定；
-- kind: 此 CRD 的类型，类似于社区原生的 Service 的概念；
-- namespaced: 此 CRD 是全局唯一还是 namespace 唯一，类似 node 和 Pod。
-
-它的参数基本可以分为两类。group, version, kind 基本上对应了 CRD 元信息的三个重要组成部分。这里给出了一些常见的标准，大家实际使用的时候可以参考一下。namespaced 则用于指定我们刚刚创建的 CRD 时全局唯一的（如 node）还是 namespace 唯一的（如 Pod）。这里用了 false，即指定 SidecarSet 为全局唯一的。
-
-效果解读：
-生成了 CRD 和 controller 的框架，后面需要手工填充代码。
-实际结果如下图所示：
-```shell
-├── api
-│   └── v1alpha1
-│       ├── groupversion_info.go
-│       ├── sidecarset_types.go
-│       └── zz_generated.deepcopy.go
-├── bin
-│   └── controller-gen
-├── config
-...
-├── controllers
-│   ├── sidecarset_controller.go
-│   └── suite_test.go
-├── Dockerfile
-├── go.mod
-├── go.sum
-├── hack
-│   └── boilerplate.go.txt
-├── main.go
-├── Makefile
-├── PROJECT
-└── README.md
-
-```
-我们重点关注下面两个文件。
-- sidecarset_types.go 就是定义 CRD 的地方，需要我们填充。
-- sidecarset_controller.go 则用于定义 controller，同样需要进行填充。
+// TODO(user): An in-depth paragraph about your project and overview of use
 
 ## Getting Started
 You’ll need a Kubernetes cluster to run against. You can use [KIND](https://sigs.k8s.io/kind) to get a local cluster for testing, or run against a remote cluster.
