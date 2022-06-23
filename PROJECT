@@ -1,0 +1,15 @@
+domain: kruise.io
+layout:
+- go.kubebuilder.io/v3
+projectName: kube-operator-sidecar
+repo: Kube-Operator-Sidecar
+resources:
+- api:
+    crdVersion: v1
+  controller: true
+  domain: kruise.io
+  group: apps
+  kind: SidecarSet
+  path: Kube-Operator-Sidecar/api/v1alpha1
+  version: v1alpha1
+version: "3"
